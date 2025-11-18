@@ -42,6 +42,7 @@ SEARCH METHOD:
 - Track best move count per unique state
 - Convergence: stop after X states without improvement
 
+IDEA: TO FIND THE LONGEST, VALID SEQUENCE WHICH MAXIMIZES EVERY STATE OF THE OBJECT TO THE MAXIMIAL POWER(EVERY STATE SHOULD BE N)
 GROWTH PROPERTIES:
 L(1) = small
 L(2) = 131
