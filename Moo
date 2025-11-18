@@ -1,0 +1,52 @@
+MOO SYSTEM DEFINITION:
+
+Input: n (number of states)
+
+STATE REPRESENTATION:
+- magnitudes[0..n-1] ∈ {0,1,...,n}
+- current_position ∈ {0,1,...,n-1} 
+- moves_since_plus2 ∈ {0,1,2}
+- total_moves (counter)
+- injection_cycle (counter)
+
+OPERATIONS PER MOVE:
+1. CHOOSE OPERATION AT CURRENT POSITION:
+   - Option 1 (+1): magnitude[pos] = min(n, magnitude[pos] + 1)
+   - Option 2 (+2): if moves_since_plus2 ≥ 2:
+        magnitude[pos] = min(n, magnitude[pos] + 2)
+        APPLY TRIGGER:
+           Find cell with MAX magnitude: decrease by 1
+           Find cell with MIN magnitude: increase by 1
+        moves_since_plus2 = 0
+
+2. MOVE to adjacent position (bounded by ends)
+
+PERIODIC EFFECTS (every move):
+- FLIPS: when (total_moves % flip_period == 1)
+   flip_period = 4→8→16→32 (progressive)
+   magnitude[i] = n - magnitude[i] for all i
+   
+- INJECTIONS: when (total_moves % cycle_length == 0) 
+   cycle_length = 131→100→80 (progressive)
+   magnitude[i] = min(n, magnitude[i] + 1) for all i
+   injection_cycle++
+
+CONSTRAINTS:
+- Valid Ordering: ∀i>0, if magnitude[i] > 0 then magnitude[i-1] ≥ magnitude[i] - 1
+
+GOAL CONDITION:
+- GOAL ≡ ∀i, magnitude[i] ≥ n
+
+SEARCH METHOD:
+- BFS with priority queue by total_moves
+- Track best move count per unique state
+- Convergence: stop after X states without improvement
+
+GROWTH PROPERTIES:
+L(1) = small
+L(2) = 338
+L(3) > 3728476+ (still growing)
+
+KEY INSIGHT:
+Finite state space but exponential path explosion creates astronomical move counts
+through systematic exploration of all possible winding routes to goal.
