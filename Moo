@@ -44,8 +44,8 @@ SEARCH METHOD:
 
 GROWTH PROPERTIES:
 L(1) = small
-L(2) = 338
-L(3) > 3728476+ (still growing)
+L(2) = 131
+L(3) > 4728476+ (still growing)
 
 KEY INSIGHT:
 Finite state space but exponential path explosion creates astronomical move counts
